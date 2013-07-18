@@ -16,6 +16,14 @@ installing_oracle_7_java(){
 	sudo apt-get install oracle-java7-jdk oracle-java7-fonts oracle-java7-source ssh
 }
 
+intall_oracle_7_java(){
+	sudo apt-get purge openjdk*
+	#Now you can install Java 7 by adding the following repository:
+	sudo add-apt-repository ppa:webupd8team/java
+	sudo apt-get update
+	sudo apt-get install oracle-java7-installer
+}
+
 installing_required_components(){
 	# Components for Development
 	sudo apt-get update
@@ -23,11 +31,13 @@ installing_required_components(){
 	sudo apt-get install tree
 	sudo apt-get install vim
 	sudo apt-get install geany
-	sudo apt-get install wine
+	#sudo apt-get install wine
 	sudo apt-get install unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack cabextract file-roller
-	sudo apt-get install libxine1-ffmpeg gxine mencoder totem-mozilla icedax tagtool easytag id3tool lame nautilus-script-audio-convert libmad0 mpg321 
+	#sudo apt-get install libxine1-ffmpeg gxine mencoder totem-mozilla icedax tagtool easytag id3tool lame nautilus-script-audio-convert libmad0 mpg321 
 	sudo apt-get install curl
 	sudo apt-get install telnetd
+	sudo apt-get purge openjdk*
+	
 }
 
 installing_python_components(){
@@ -47,34 +57,25 @@ installing_linux_headers(){
 	sudo apt-get install linux-headers-$(uname -r)
 }
 
-installing_apache_tomcat_7(){
-	# Download Apache Tomcat
+downloading_files(){
 	cd ~/Downloads
-	wget http://mirrors.sonic.net/apache/tomcat/tomcat-7/v7.0.42/bin/apache-tomcat-7.0.42.tar.gz
+	wget -c http://mirrors.sonic.net/apache/tomcat/tomcat-7/v7.0.42/bin/apache-tomcat-7.0.42.tar.gz
+	wget -c http://download.jetbrains.com/idea/ideaIU-12.1.4.tar.gz
+	wget -c http://downloads.sourceforge.net/project/xampp/XAMPP%20Linux/1.7.7/xampp-linux-1.7.7.tar.gz
+}
+
+transfer_files_opt(){
 	sudo tar xvzf apache-tomcat-7.0.42.tar.gz -C /opt
-	cd /opt
-	sudo chown $USER:$USER -R apache-tomcat-7.0.42
-}
-
-installing_intelliJ_ultimate(){
-	# Download IntelliJ
-	cd ~/Downloads
-	wget http://download.jetbrains.com/idea/ideaIU-12.1.4.tar.gz
 	sudo tar xvzf ideaIU-12.1.4.tar.gz -C /opt
-	cd /opt
-	sudo chown $USER:$USER -R ideaIU*
+	sudo tar xvzf xampp-linux-1.7.7.tar.gz -C /opt
 }
 
-installing_xampp(){
-	# Download Xampp - For MySQL and FTP
-	cd ~/Downloads/
-	wget http://downloads.sourceforge.net/project/xampp/XAMPP%20Linux/1.7.7/xampp-linux-1.7.7.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fxampp%2Ffiles%2FXAMPP%2520Linux%2F1.7.7%2F&ts=1374124544&use_mirror=kaz
-	mv xampp* xampp.tgz
-	sudo tar xvzf xampp.tar.gz -C /opt
-	cd /opt
-	sudo /opt/lampp/lampp start
+configuring_downloads(){
+	cd /opt/
+	sudo chown $USER:$USER -R apache-tomcat-7.0.42
+	sudo chown $USER:$USER -R idea*
+	sudo /opt/lampp/lampp start		
 }
-
 
 installing_cloudera_precise(){
 	# Installing Clodera Hadoop.
@@ -132,7 +133,7 @@ config_cloudera_hadoop(){
 }
 
 
-echo -e "${BOLD}${RED_F} Welcome to Ubuntu Setup Desktop ${NORM}"
+echo -e "${BOLD}${RED_F} Welcome to Ubuntu Desktop Setup  ${NORM}"
 echo
 
 
@@ -168,9 +169,9 @@ fi
 echo -n "Would you like to install dev Components? (y/n) "
 read SET_DEV_INSTALL
 if [ "${SET_DEV_INSTALL}" == "y" ]; then
-	installing_apache_tomcat_7
-	installing_xampp
-	installing_intelliJ_ultimate
+	downloading_files
+	transfer_files_opt
+	configuring_downloads
 else
 	 echo -e "DEV Not Installed"
 
