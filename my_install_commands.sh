@@ -37,6 +37,7 @@ installing_required_components(){
 	sudo apt-get install curl
 	sudo apt-get install telnetd
 	sudo apt-get install subversion
+	sudo apt-get install mysql-server
 	sudo apt-get purge openjdk*
 	
 }
@@ -68,7 +69,7 @@ downloading_files(){
 transfer_files_opt(){
 	sudo tar xvzf apache-tomcat-7.0.42.tar.gz -C /opt
 	sudo tar xvzf ideaIU-12.1.4.tar.gz -C /opt
-	sudo tar xvzf xampp-linux-1.7.7.tar.gz -C /opt
+	#sudo tar xvzf xampp-linux-1.7.7.tar.gz -C /opt
 }
 
 configuring_downloads(){
