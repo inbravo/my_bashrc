@@ -36,6 +36,7 @@ installing_required_components(){
 	#sudo apt-get install libxine1-ffmpeg gxine mencoder totem-mozilla icedax tagtool easytag id3tool lame nautilus-script-audio-convert libmad0 mpg321 
 	sudo apt-get install curl
 	sudo apt-get install telnetd
+	sudo apt-get install subversion
 	sudo apt-get purge openjdk*
 	
 }
@@ -83,7 +84,9 @@ installing_cloudera_precise(){
 	wget http://archive.cloudera.com/cdh4/one-click-install/precise/amd64/cdh4-repository_1.0_all.deb
 	sudo dpkg -i cdh4-repository_1.0_all.deb
 	sudo apt-get update
-	sudo apt-get install hadoop-0.20-conf-pseudo
+	sudo apt-get install zookeeper-server
+	#sudo apt-get install zookeeper=3.4.5+19-1.cdh4.3.0.p0.14~precise-cdh4.3.0 hadoop-0.20-conf-pseudo
+	sudo apt-get install zookeeper=3.4.5+19-1.cdh4.3.0.p0.14~precise-cdh4.3.0 hadoop-0.20-conf-pseudo
 }
 
 config_cloudera_hadoop(){
