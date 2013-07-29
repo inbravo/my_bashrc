@@ -33,7 +33,7 @@ installing_required_components(){
 	sudo apt-get install geany
 	#sudo apt-get install wine
 	sudo apt-get install unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack cabextract file-roller
-	#sudo apt-get install libxine1-ffmpeg gxine mencoder totem-mozilla icedax tagtool easytag id3tool lame nautilus-script-audio-convert libmad0 mpg321 
+	sudo apt-get install libxine1-ffmpeg gxine mencoder totem-mozilla icedax tagtool easytag id3tool lame nautilus-script-audio-convert libmad0 mpg321 
 	sudo apt-get install curl
 	sudo apt-get install telnetd
 	sudo apt-get install subversion
@@ -86,8 +86,71 @@ installing_cloudera_precise(){
 	sudo dpkg -i cdh4-repository_1.0_all.deb
 	sudo apt-get update
 	sudo apt-get install zookeeper-server
+	sudo service zookeeper-server init
 	#sudo apt-get install zookeeper=3.4.5+19-1.cdh4.3.0.p0.14~precise-cdh4.3.0 hadoop-0.20-conf-pseudo
-	sudo apt-get install zookeeper=3.4.5+19-1.cdh4.3.0.p0.14~precise-cdh4.3.0 hadoop-0.20-conf-pseudo
+	sudo apt-get install hadoop-0.20-conf-pseudo
+	sudo apt-get install hbase-master
+	sudo apt-get install hbase-regionserver	 
+}
+
+config_hbase()
+{
+	HBASE_UPDATE_FILE_PATH="/etc/hbase/conf/hbase-site.xml.updated.org"
+	HBASE_ORG_PATH="/etc/hbase/conf/hbase-site.xml"
+	HBASE_TEMP_PATH="/tmp/hbase-site.xml"
+
+	
+	echo -e "${BOLD}${RED_F} Updating Hbase Configuration Files: ${NORM}"
+    echo -n "Would like to update hbase-site.xml files (y/n)"
+    read UPDATE_FILE
+	
+	if [ $UPDATE_FILE == "y" ]; then
+        if [ -f $HBASE_UPDATE_FILE_PATH ];
+        then
+            echo -e "${BOLD}${RED_F} File $HBASE_UPDATE_FILE_PATH exists${NORM}"
+            echo -n "File Already updated by this script, Do you really want to update File. (y/n)"
+            read UPDATE_FILE
+            if [ $UPDATE_FILE = "y" ]; then
+                sudo cp $HBASE_ORG_PATH $HBASE_UPDATE_FILE_PATH
+                echo "<?xml version=\"1.0\"?>
+<?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>
+            
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+<property>
+  <name>hbase.cluster.distributed</name>
+  <value>true</value>
+</property>
+<property>
+  <name>hbase.rootdir</name>
+  <value>hdfs://localhost:8020/hbase</value>
+</property>
+</configuration>" >> $HBASE_TEMP_PATH
+                sudo cp $HBASE_TEMP_PATH $HBASE_ORG_PATH
+                rm $HBASE_TEMP_PATH
+        fi
+        else
+            sudo cp $HBASE_ORG_PATH $HBASE_UPDATE_FILE_PATH
+            echo "<?xml version=\"1.0\"?>
+<?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>
+            
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+<property>
+  <name>hbase.cluster.distributed</name>
+  <value>true</value>
+</property>
+<property>
+  <name>hbase.rootdir</name>
+  <value>hdfs://localhost:8020/hbase</value>
+</property>
+</configuration>" >> $HBASE_TEMP_PATH
+                sudo cp $HBASE_TEMP_PATH $HBASE_ORG_PATH
+                rm $HBASE_TEMP_PATH
+
+        fi
 }
 
 config_cloudera_hadoop(){
@@ -100,6 +163,10 @@ config_cloudera_hadoop(){
 	# Step 3: Create the /tmp Directory
 	sudo -u hdfs hadoop fs -mkdir /tmp 
 	sudo -u hdfs hadoop fs -chmod -R 1777 /tmp
+	 
+	# 3,1 Create Directory for Hbase
+	sudo -u hdfs hadoop fs -mkdir /hbase 
+	sudo -u hdfs hadoop fs -chown hbase /hbase
 	 
 	# Step 4: Create the MapReduce system directories: 
 	sudo -u hdfs hadoop fs -mkdir -p /var/lib/hadoop-hdfs/cache/mapred/mapred/staging
