@@ -17,7 +17,7 @@ CYAN_F="\033[36m"; CYAN_B="\033[46m"
 WHITE_F="\033[37m"; WHITE_B="\033[47m"
 
 	
-HBASE_UPDATE_FILE_PATH="/etc/hbase/conf/hbase-site.xml.updated.org"
+HBASE_UPDATE_FILE_PATH="/etc/hbase/conf/hbase-site.xml.updated.org_$(date +'%d-%m-%Y')"
 HBASE_ORG_PATH="/etc/hbase/conf/hbase-site.xml"
 HBASE_TEMP_PATH="/tmp/hbase-site.xml"
 
@@ -53,7 +53,7 @@ installing_required_components(){
 	sudo apt-get install tree
 	sudo apt-get install vim
 	sudo apt-get install geany
-	#sudo apt-get install wine
+	sudo apt-get install wine
 	sudo apt-get install unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack cabextract file-roller
 	sudo apt-get install libxine1-ffmpeg gxine mencoder totem-mozilla icedax tagtool easytag id3tool lame nautilus-script-audio-convert libmad0 mpg321 
 	sudo apt-get install curl
@@ -61,6 +61,15 @@ installing_required_components(){
 	sudo apt-get install subversion
 	sudo apt-get install mysql-server
 	sudo apt-get purge openjdk*
+    
+    # Setting VIMrc for me
+    git clone git://github.com/amix/vimrc.git ~/.vim_runtime
+    sh ~/.vim_runtime/install_basic_vimrc.sh
+
+    # setting bashrc 
+    cp ~/.bashrc ~/.bashrc_org."$(date +'%d-%m-%Y')"
+    wget --directory-prefix=$HOME https://raw.github.com/zubayr/my_bashrc/master/bashrc_new
+    mv $HOME/bashrc_new $HOME/.bashrc
 	
 }
 
@@ -267,7 +276,7 @@ else
 
 fi
 
-echo -e "${RED_F}Would you like to install Cludera for Precise Single Node Cluster? (y/n)${NORM}"
+echo -e "${RED_F}Would you like to install Cloudera for Precise Single Node Cluster? (y/n)${NORM}"
 read SET_CLOUDERA_PSEUDO_INSTALL
 if [ "${SET_CLOUDERA_PSEUDO_INSTALL}" == "y" ]; then
 	installing_cloudera_precise
@@ -277,7 +286,7 @@ else
 fi
 
 
-echo -e "${RED_F}Would you like to Configure Cludera for Precise Single Node Cluster? (y/n)${NORM}"
+echo -e "${RED_F}Would you like to Configure Cloudera for Precise Single Node Cluster? (y/n)${NORM}"
 read SET_CLOUDERA_PSEUDO_CONFIG
 if [ "${SET_CLOUDERA_PSEUDO_CONFIG}" == "y" ]; then
 	config_cloudera_hadoop
