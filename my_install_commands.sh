@@ -1,5 +1,27 @@
 #!/usr/bin/env bash
 
+#
+# Text Formating
+#
+
+BOLD="\033[1m";
+NORM="\033[0m";
+
+BLACK_F="\033[30m"; BLACK_B="\033[40m"
+RED_F="\033[31m"; RED_B="\033[41m"
+GREEN_F="\033[32m"; GREEN_B="\033[42m"
+YELLOW_F="\033[33m"; YELLOW_B="\033[43m"
+BLUE_F="\033[34m"; BLUE_B="\033[44m"
+MAGENTA_F="\033[35m"; MAGENTA_B="\033[45m"
+CYAN_F="\033[36m"; CYAN_B="\033[46m"
+WHITE_F="\033[37m"; WHITE_B="\033[47m"
+
+	
+HBASE_UPDATE_FILE_PATH="/etc/hbase/conf/hbase-site.xml.updated.org"
+HBASE_ORG_PATH="/etc/hbase/conf/hbase-site.xml"
+HBASE_TEMP_PATH="/tmp/hbase-site.xml"
+
+
 uninstall_open_java(){
 	# Removing Open JDK from the system.
 	sudo apt-get purge openjdk*
@@ -89,26 +111,22 @@ installing_cloudera_precise(){
 	sudo service zookeeper-server init
 	#sudo apt-get install zookeeper=3.4.5+19-1.cdh4.3.0.p0.14~precise-cdh4.3.0 hadoop-0.20-conf-pseudo
 	sudo apt-get install hadoop-0.20-conf-pseudo
-	sudo apt-get install hbase-master
+	sudo apt-get install hbase-master # this will install Hbase as well
 	sudo apt-get install hbase-regionserver	 
 }
 
 config_hbase()
 {
-	HBASE_UPDATE_FILE_PATH="/etc/hbase/conf/hbase-site.xml.updated.org"
-	HBASE_ORG_PATH="/etc/hbase/conf/hbase-site.xml"
-	HBASE_TEMP_PATH="/tmp/hbase-site.xml"
 
-	
-	echo -e "${BOLD}${RED_F} Updating Hbase Configuration Files: ${NORM}"
-    echo -n "Would like to update hbase-site.xml files (y/n)"
+    echo -e "${BOLD}${RED_F} Updating Hbase Configuration Files: ${NORM}"
+    echo -e "${RED_F}Would like to update hbase-site.xml files (y/n)${NORM}"
     read UPDATE_FILE
 	
 	if [ $UPDATE_FILE == "y" ]; then
         if [ -f $HBASE_UPDATE_FILE_PATH ];
         then
             echo -e "${BOLD}${RED_F} File $HBASE_UPDATE_FILE_PATH exists${NORM}"
-            echo -n "File Already updated by this script, Do you really want to update File. (y/n)"
+            echo -e "${RED_F}File Already updated by this script, Do you really want to update File. (y/n)${NORM}"
             read UPDATE_FILE
             if [ $UPDATE_FILE = "y" ]; then
                 sudo cp $HBASE_ORG_PATH $HBASE_UPDATE_FILE_PATH
@@ -151,6 +169,7 @@ config_hbase()
                 rm $HBASE_TEMP_PATH
 
         fi
+	fi
 }
 
 config_cloudera_hadoop(){
@@ -208,64 +227,76 @@ echo -e "${BOLD}${RED_F} Welcome to Ubuntu Desktop Setup  ${NORM}"
 echo
 
 
-echo -n "Would you like to remove Open Java ? (y/n) "
+echo -e "${RED_F}Would you like to remove Open Java ? (y/n)${NORM}"
 read SET_OPENJAVA_UNINSTALL
 if [ "${SET_OPENJAVA_UNINSTALL}" == "y" ]; then
 	uninstall_open_java
 else
-	 echo -e "Open Java Not UnInstalled"
+	 echo -e "${RED_F}Open Java Not UnInstalled${NORM}"
 fi
 
-echo -n "Would you like to install Oracle Java 7? (y/n) "
+echo -e "${RED_F}Would you like to install Oracle Java 7? (y/n)${NORM}"
 read SET_JAVA_INSTALL
 if [ "${SET_JAVA_INSTALL}" == "y" ]; then
 	installing_oracle_7_java
 else
-	 echo -e "Java Not Installed"
+	 echo -e "${RED_F}Java Not Installed${NORM}"
 
 fi
 
-echo -n "Would you like to general Components? (y/n) "
+echo -e "${RED_F}Would you like to general Components? (y/n)${NORM}"
 read SET_GEN_INSTALL
 if [ "${SET_GEN_INSTALL}" == "y" ]; then
 	installing_required_components
 	installing_python_components
 	installing_linux_headers
 else
-	 echo -e "GEN Not Installed"
+	 echo -e "${RED_F}GEN Not Installed${NORM}"
 
 fi
 
 
-echo -n "Would you like to install dev Components? (y/n) "
+echo -e "${RED_F}Would you like to install dev Components? (y/n)${NORM}"
 read SET_DEV_INSTALL
 if [ "${SET_DEV_INSTALL}" == "y" ]; then
 	downloading_files
 	transfer_files_opt
 	configuring_downloads
 else
-	 echo -e "DEV Not Installed"
+	 echo -e "${RED_F}DEV Not Installed${NORM}"
 
 fi
 
-echo -n "Would you like to install Cludera for Precise Single Node Cluster? (y/n) "
-read SET_CLUDERA_PSEUDO_INSTALL
-if [ "${SET_CLUDERA_PSEUDO_INSTALL}" == "y" ]; then
+echo -e "${RED_F}Would you like to install Cludera for Precise Single Node Cluster? (y/n)${NORM}"
+read SET_CLOUDERA_PSEUDO_INSTALL
+if [ "${SET_CLOUDERA_PSEUDO_INSTALL}" == "y" ]; then
 	installing_cloudera_precise
 else
-	 echo -e "CLUDERA_PSEUDO Not Installed"
+	 echo -e "${RED_F}CLOUDERA_PSEUDO Not Installed${NORM}"
 
 fi
 
 
-echo -n "Would you like to Configure Cludera for Precise Single Node Cluster? (y/n) "
-read SET_CLUDERA_PSEUDO_CONFIG
-if [ "${SET_CLUDERA_PSEUDO_CONFIG}" == "y" ]; then
+echo -e "${RED_F}Would you like to Configure Cludera for Precise Single Node Cluster? (y/n)${NORM}"
+read SET_CLOUDERA_PSEUDO_CONFIG
+if [ "${SET_CLOUDERA_PSEUDO_CONFIG}" == "y" ]; then
 	config_cloudera_hadoop
 else
-	 echo -e "CLUDERA_CONFIG Not Complete"
+	 echo -e "${RED_F}CLOUDERA_CONFIG Not Complete${NORM}"
 
 fi
 
 
-
+echo -e "${RED_F}Would you like to Configure Hbase for Precise Single Node Cluster? (y/n)${NORM}"
+read SET_HBASE_PSEUDO_CONFIG
+	if [ "${SET_HBASE_PSEUDO_CONFIG}" == "y" ]; then		
+		if [ -f HBASE_ORG_PATH ]; then
+        		config_hbase
+		else
+			echo -e "${RED_F}No hbase-site.xml present ot update\n${NORM}";
+			echo -e "${BOLD}${RED_F} - Please check if Hbase is intalled on the system\n${NORM}";
+			exit 1
+		fi
+	else
+        	echo -e "${RED_F}CLOUDERA_HBASE_CONFIG Not Complete${NORM}"
+fi
