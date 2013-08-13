@@ -59,19 +59,46 @@ installing_required_components(){
 	sudo apt-get install curl
 	sudo apt-get install telnetd
 	sudo apt-get install subversion
-	sudo apt-get install mysql-server
+    sudo apt-get install openvpn
+
+    # Installing MySQl Server and Client.
+    installing_work_bench
+
+    # Lets make sure openJDK is totally gone. 
 	sudo apt-get purge openjdk*
     
+	
+}
+
+setting_up_git_repos()
+{
+
+    #Make a Directory for this.
+    mkdir -p ~/AHMED/gitRepos
+    cd ~/AHMED/gitRepos
+
     # Setting VIMrc for me
     git clone git://github.com/amix/vimrc.git ~/.vim_runtime
     sh ~/.vim_runtime/install_basic_vimrc.sh
+
+    git clone https://github.com/zubayr/big_data_learning.git
+    git clone https://github.com/zubayr/my_bashrc.git
 
     # setting bashrc 
     cp ~/.bashrc ~/.bashrc_org."$(date +'%d-%m-%Y')"
     wget --directory-prefix=$HOME https://raw.github.com/zubayr/my_bashrc/master/bashrc_new
     mv $HOME/bashrc_new $HOME/.bashrc
-	
+
 }
+
+installing_work_bench()
+{
+	sudo apt-get install mysql-server
+    sudo add-apt-repository ppa:olivier-berten/misc
+    sudo apt-get update
+    sudo apt-get install mysql-workbench
+}
+
 
 installing_python_components(){
 	# Installing Python and required components
@@ -94,20 +121,28 @@ downloading_files(){
 	cd ~/Downloads
 	wget -c http://mirrors.sonic.net/apache/tomcat/tomcat-7/v7.0.42/bin/apache-tomcat-7.0.42.tar.gz
 	wget -c http://download.jetbrains.com/idea/ideaIU-12.1.4.tar.gz
+	wget -c http://download.jetbrains.com/idea/ideaIC-12.1.4.tar.gz
 	wget -c http://downloads.sourceforge.net/project/xampp/XAMPP%20Linux/1.7.7/xampp-linux-1.7.7.tar.gz
 }
 
 transfer_files_opt(){
 	sudo tar xvzf apache-tomcat-7.0.42.tar.gz -C /opt
-	sudo tar xvzf ideaIU-12.1.4.tar.gz -C /opt
+    sudo tar xvzf ideaIU-12.1.4.tar.gz -C /opt
+    sudo tar xvzf ideaIC-12.1.4.tar.gz -C /opt
+    
+    cd /opt/
+    sudo ln -s ideaIU-12.1.4 ideaU
+    sudo ln -s ideaIC-12.1.4 ideaC
+    cd -
+
 	#sudo tar xvzf xampp-linux-1.7.7.tar.gz -C /opt
 }
 
 configuring_downloads(){
 	cd /opt/
-	sudo chown $USER:$USER -R apache-tomcat-7.0.42
+	#sudo chown $USER:$USER -R apache-tomcat-7.0.42
 	sudo chown $USER:$USER -R idea*
-	sudo /opt/lampp/lampp start		
+	#sudo /opt/lampp/lampp start		
 }
 
 installing_cloudera_precise(){
@@ -247,7 +282,8 @@ fi
 echo -e "${RED_F}Would you like to install Oracle Java 7? (y/n)${NORM}"
 read SET_JAVA_INSTALL
 if [ "${SET_JAVA_INSTALL}" == "y" ]; then
-	installing_oracle_7_java
+	#installing_oracle_7_java
+    intall_oracle_7_java
 else
 	 echo -e "${RED_F}Java Not Installed${NORM}"
 
