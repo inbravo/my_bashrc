@@ -44,6 +44,7 @@ intall_oracle_7_java(){
 	sudo add-apt-repository ppa:webupd8team/java
 	sudo apt-get update
 	sudo apt-get install oracle-java7-installer
+    sudo apt-get install oracle-java7-jdk oracle-java7-fonts oracle-java7-source ssh
 }
 
 installing_required_components(){
@@ -61,15 +62,6 @@ installing_required_components(){
 	sudo apt-get install subversion
 	sudo apt-get install mysql-server
 	sudo apt-get purge openjdk*
-    
-    # Setting VIMrc for me
-    git clone git://github.com/amix/vimrc.git ~/.vim_runtime
-    sh ~/.vim_runtime/install_basic_vimrc.sh
-
-    # setting bashrc 
-    cp ~/.bashrc ~/.bashrc_org."$(date +'%d-%m-%Y')"
-    wget --directory-prefix=$HOME https://raw.github.com/zubayr/my_bashrc/master/bashrc_new
-    mv $HOME/bashrc_new $HOME/.bashrc
 	
 }
 
@@ -95,7 +87,6 @@ downloading_files(){
 	wget -c http://mirrors.sonic.net/apache/tomcat/tomcat-7/v7.0.42/bin/apache-tomcat-7.0.42.tar.gz
 	wget -c http://download.jetbrains.com/idea/ideaIU-12.1.4.tar.gz
 	wget -c http://download.jetbrains.com/idea/ideaIC-12.1.4.tar.gz
-	wget -c http://downloads.sourceforge.net/project/xampp/XAMPP%20Linux/1.7.7/xampp-linux-1.7.7.tar.gz
 }
 
 transfer_files_opt(){
@@ -103,12 +94,6 @@ transfer_files_opt(){
     sudo tar xvzf ideaIU-12.1.4.tar.gz -C /opt
     sudo tar xvzf ideaIC-12.1.4.tar.gz -C /opt
     
-    cd /opt/
-    sudo ln -s ideaIU-12.1.4 ideaU
-    sudo ln -s ideaIC-12.1.4 ideaC
-    cd -
-
-	#sudo tar xvzf xampp-linux-1.7.7.tar.gz -C /opt
 }
 
 configuring_downloads(){
@@ -255,7 +240,8 @@ fi
 echo -e "${RED_F}Would you like to install Oracle Java 7? (y/n)${NORM}"
 read SET_JAVA_INSTALL
 if [ "${SET_JAVA_INSTALL}" == "y" ]; then
-	installing_oracle_7_java
+	#installing_oracle_7_java
+    intall_oracle_7_java
 else
 	 echo -e "${RED_F}Java Not Installed${NORM}"
 
