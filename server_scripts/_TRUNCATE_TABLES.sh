@@ -32,5 +32,5 @@ if [ $UPDATE_FILE == "yes" ]; then
   truncate 'VRF_DETAIL'" | hbase shell
 fi
 if [ $UPDATE_FILE == "y" ]; then
-  echo "${MAGENTA_F}Please type 'yes' if you are sure to delete HBase Tables${NORM}"
+  echo -e "${MAGENTA_F}Please type 'yes' if you are sure to delete HBase Tables${NORM}"
 fi
