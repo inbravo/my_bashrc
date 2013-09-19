@@ -14,6 +14,7 @@ MAGENTA_F="\033[35m"; MAGENTA_B="\033[45m"
 CYAN_F="\033[36m"; CYAN_B="\033[46m"
 WHITE_F="\033[37m"; WHITE_B="\033[47m"
 
+CURRENTTIME="$(date +'%Y%m%d%H%M')"
 
 sudo /data/apache-tomcat-7.0.42/bin/shutdown.sh
 echo -e "${BOLD}${RED_F}Waiting for Server to shutdown"
@@ -22,22 +23,22 @@ tail -10 /data/apache-tomcat-7.0.42/logs/catalina.out
 sleep 5
 
 echo -e "${BOLD}${CYAN_F}Starting backup procedure for 'LI' database > '/data/zahmed/backup/li_$(date +'%Y%m%d%H%M').sql'${NORM}"
-mysqldump -uli -pli li > /data/zahmed/backup/li_"$(date +'%Y%m%d%H%M')".sql
-tar czf /data/zahmed/backup/li_"$(date +'%Y%m%d%H%M')".sql.tgz -P /data/zahmed/backup/li_"$(date +'%Y%m%d%H%M')".sql
-rm  /data/zahmed/backup/li_"$(date +'%Y%m%d%H%M')".sql
+mysqldump -uli -pli li > /data/zahmed/backup/li_$CURRENTTIME.sql
+tar czf /data/zahmed/backup/li_$CURRENTTIME.sql.tgz -P /data/zahmed/backup/li_$CURRENTTIME.sql
+rm  /data/zahmed/backup/li_$CURRENTTIME.sql
 sleep 1
 
 echo -e "${BOLD}${CYAN_F}Starting backup procedure li jar files > '/data/zahmed/backup/li_jar_$(date +'%Y%m%d%H%M').tgz'${NORM}"
-tar czf /data/zahmed/backup/li_jar_"$(date +'%Y%m%d%H%M')".tgz -P /var/local/libjars/li*
+tar czf /data/zahmed/backup/li_jar_$CURRENTTIME.tgz -P /var/local/libjars/li*
 sleep 1
 
 echo -e "${BOLD}${CYAN_F}Starting backup procedure li sample_date files > '/data/zahmed/backup/li_sample_data_$(date +'%Y%m%d%H%M').tgz'${NORM}"
-tar czf /data/zahmed/backup/li_sample_data_"$(date +'%Y%m%d%H%M')".tgz -P /var/local/li
+tar czf /data/zahmed/backup/li_sample_data_$CURRENTTIME.tgz -P /var/local/li
 sleep 1 
 echo -e "${BOLD}${CYAN_F}Completed backup procedure li sample_date files.${NORM}"
 
 echo -e "${BOLD}${CYAN_F}Backing-up li.war to '/data/zahmed/backup/li_$(date +'%Y%m%d%H%M').war'${NORM}"
-cp -rf /data/apache-tomcat-7.0.42/webapps/li.war /data/zahmed/backup/li_"$(date +'%Y%m%d%H%M')".war
+cp -rf /data/apache-tomcat-7.0.42/webapps/li.war /data/zahmed/backup/li_$CURRENTTIME.war
 sleep 1
 
 echo -e "${BOLD}${YELLOW_F}Removing old war file${NORM}"
