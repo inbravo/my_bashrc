@@ -55,4 +55,5 @@ sudo cp li-core-apf-1.0.jar li-core-api-1.0.jar li-data-collector-api-1.0.jar li
 cd -
 echo -e "${BOLD}${RED_F}Jar copy complete.${NORM}"
 
-
+echo -e "${BOLD}${RED_F}Starting Tomcat Server${NORM}"
+sudo /data/apache-tomcat-7.0.42/bin/startup.sh
