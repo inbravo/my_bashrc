@@ -109,9 +109,9 @@ installing_cloudera_precise(){
 	wget http://archive.cloudera.com/cdh4/one-click-install/precise/amd64/cdh4-repository_1.0_all.deb
 	sudo dpkg -i cdh4-repository_1.0_all.deb
 	sudo apt-get update
+	sudo apt-get install zookeeper=3.4.5+19-1.cdh4.3.0.p0.14~precise-cdh4.3.0 hadoop-0.20-conf-pseudo
 	sudo apt-get install zookeeper-server
 	sudo service zookeeper-server init
-	#sudo apt-get install zookeeper=3.4.5+19-1.cdh4.3.0.p0.14~precise-cdh4.3.0 hadoop-0.20-conf-pseudo
 	sudo apt-get install hadoop-0.20-conf-pseudo
 	sudo apt-get install hbase-master # this will install Hbase as well
 	sudo apt-get install hbase-regionserver	 
@@ -293,7 +293,7 @@ fi
 echo -e "${RED_F}Would you like to Configure Hbase for Precise Single Node Cluster? (y/n)${NORM}"
 read SET_HBASE_PSEUDO_CONFIG
 	if [ "${SET_HBASE_PSEUDO_CONFIG}" == "y" ]; then		
-		if [ -f HBASE_ORG_PATH ]; then
+		if [ -f $HBASE_ORG_PATH ]; then
         		config_hbase
 		else
 			echo -e "${RED_F}No hbase-site.xml present ot update\n${NORM}";
