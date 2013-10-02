@@ -29,6 +29,7 @@ create 'VRF_DETAIL' , 'CONFIG', 'DETAIL', 'PERFORMANCE'
 create 'REPORT_TABLE' , 'REPORT_CONFIG'
 create 'VRF_REPORT' , 'REPORT'
 create 'PWE_DETAIL' , 'CONFIG', 'DETAIL', 'PERFORMANCE'
+create 'TRUNK_REPORT', 'REPORT'
 create 'RBS_RNC_PATH' , 'PATH'" | hbase shell 
 
 fi

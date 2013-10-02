@@ -34,6 +34,8 @@ hbase org.apache.hadoop.hbase.mapreduce.Import TRUNK_DETAIL $PATH_IN_HDFS/TRUNK_
 hbase org.apache.hadoop.hbase.mapreduce.Import VRF_DETAIL $PATH_IN_HDFS/VRF_DETAIL_$DATE_INFO
 hbase org.apache.hadoop.hbase.mapreduce.Import AREA_TABLE $PATH_IN_HDFS/AREA_TABLE_$DATE_INFO
 hbase org.apache.hadoop.hbase.mapreduce.Import DATE_TABLE $PATH_IN_HDFS/DATE_TABLE_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Export VRF_REPORT $PATH_IN_HDFS/VRF_REPORT_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Export TRUNK_REPORT $PATH_IN_HDFS/TRUNK_REPORT_$DATE_INFO
 echo -e "${RED_F}IMPORT COMPLETE !!! ${NORM}"
 
 

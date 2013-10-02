@@ -29,6 +29,7 @@ hbase org.apache.hadoop.hbase.mapreduce.Export VRF_DETAIL /data/ti-dev/zahmed/ta
 hbase org.apache.hadoop.hbase.mapreduce.Export AREA_TABLE /data/ti-dev/zahmed/tables/backup/AREA_TABLE_$CURRENTTIME
 hbase org.apache.hadoop.hbase.mapreduce.Export DATE_TABLE /data/ti-dev/zahmed/tables/backup/DATE_TABLE_$CURRENTTIME
 hbase org.apache.hadoop.hbase.mapreduce.Export VRF_REPORT /data/ti-dev/zahmed/tables/backup/VRF_REPORT_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export TRUNK_REPORT /data/ti-dev/zahmed/tables/backup/TRUNK_REPORT_$CURRENTTIME
 
 echo -e "${BOLD}${RED_F}Backup Complete ... ${NORM}"
 echo -e "${YELLOW_F}"
