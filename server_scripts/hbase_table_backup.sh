@@ -21,6 +21,7 @@ hbase org.apache.hadoop.hbase.mapreduce.Export RBS_DETAIL /data/ti-dev/zahmed/ta
 hbase org.apache.hadoop.hbase.mapreduce.Export NODE_DETAIL /data/ti-dev/zahmed/tables/backup/NODE_DETAIL_$CURRENTTIME
 hbase org.apache.hadoop.hbase.mapreduce.Export LSP_DETAIL /data/ti-dev/zahmed/tables/backup/LSP_DETAIL_$CURRENTTIME
 hbase org.apache.hadoop.hbase.mapreduce.Export PWE_DETAIL /data/ti-dev/zahmed/tables/backup/PWE_DETAIL_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export ENTPWE_DETAIL /data/ti-dev/zahmed/tables/backup/ENTPWE_DETAIL_$CURRENTTIME
 hbase org.apache.hadoop.hbase.mapreduce.Export RBS_RNC_PATH /data/ti-dev/zahmed/tables/backup/RBS_RNC_PATH_$CURRENTTIME
 hbase org.apache.hadoop.hbase.mapreduce.Export REPORT_TABLE /data/ti-dev/zahmed/tables/backup/REPORT_TABLE_$CURRENTTIME
 hbase org.apache.hadoop.hbase.mapreduce.Export RNC_DETAIL /data/ti-dev/zahmed/tables/backup/RNC_DETAIL_$CURRENTTIME
