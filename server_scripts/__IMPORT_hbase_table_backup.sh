@@ -21,21 +21,26 @@ read DATE_INFO
 echo -e "${RED_F}Enter Base PATH in HDFS ${NORM}"
 read PATH_IN_HDFS
 
-#if [ $UPDATE_FILE != "" ] && [ $PATH_IN_HDFS != "" ]; then
 
-hbase org.apache.hadoop.hbase.mapreduce.Import RBS_DETAIL $PATH_IN_HDFS/RBS_DETAIL_$DATE_INFO
-hbase org.apache.hadoop.hbase.mapreduce.Import NODE_DETAIL $PATH_IN_HDFS/NODE_DETAIL_$DATE_INFO
-hbase org.apache.hadoop.hbase.mapreduce.Import LSP_DETAIL $PATH_IN_HDFS/LSP_DETAIL_$DATE_INFO
-hbase org.apache.hadoop.hbase.mapreduce.Import PWE_DETAIL $PATH_IN_HDFS/PWE_DETAIL_$DATE_INFO
-hbase org.apache.hadoop.hbase.mapreduce.Import RBS_RNC_PATH $PATH_IN_HDFS/RBS_RNC_PATH_$DATE_INFO
-hbase org.apache.hadoop.hbase.mapreduce.Import REPORT_TABLE $PATH_IN_HDFS/REPORT_TABLE_$DATE_INFO
-hbase org.apache.hadoop.hbase.mapreduce.Import RNC_DETAIL $PATH_IN_HDFS/RNC_DETAIL_$DATE_INFO
-hbase org.apache.hadoop.hbase.mapreduce.Import TRUNK_DETAIL $PATH_IN_HDFS/TRUNK_DETAIL_$DATE_INFO
-hbase org.apache.hadoop.hbase.mapreduce.Import VRF_DETAIL $PATH_IN_HDFS/VRF_DETAIL_$DATE_INFO
-hbase org.apache.hadoop.hbase.mapreduce.Import AREA_TABLE $PATH_IN_HDFS/AREA_TABLE_$DATE_INFO
-hbase org.apache.hadoop.hbase.mapreduce.Import DATE_TABLE $PATH_IN_HDFS/DATE_TABLE_$DATE_INFO
-hbase org.apache.hadoop.hbase.mapreduce.Export VRF_REPORT $PATH_IN_HDFS/VRF_REPORT_$DATE_INFO
-hbase org.apache.hadoop.hbase.mapreduce.Export TRUNK_REPORT $PATH_IN_HDFS/TRUNK_REPORT_$DATE_INFO
+echo -e "${RED_F}Enter Base PATH in HDFS ${NORM}"
+read HBASE_PREFIX
+
+
+#if [ $UPDATE_FILE != "" ] && [ $PATH_IN_HDFS != "" ]; then
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"RBS_DETAIL $PATH_IN_HDFS/RBS_DETAIL_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"NODE_DETAIL $PATH_IN_HDFS/NODE_DETAIL_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"LSP_DETAIL $PATH_IN_HDFS/LSP_DETAIL_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"PWE_DETAIL $PATH_IN_HDFS/PWE_DETAIL_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"ENTPWE_DETAIL $PATH_IN_HDFS/ENTPWE_DETAIL_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"RBS_RNC_PATH $PATH_IN_HDFS/RBS_RNC_PATH_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"REPORT_TABLE $PATH_IN_HDFS/REPORT_TABLE_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"RNC_DETAIL $PATH_IN_HDFS/RNC_DETAIL_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"TRUNK_DETAIL $PATH_IN_HDFS/TRUNK_DETAIL_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"VRF_DETAIL $PATH_IN_HDFS/VRF_DETAIL_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"AREA_TABLE $PATH_IN_HDFS/AREA_TABLE_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"DATE_TABLE $PATH_IN_HDFS/DATE_TABLE_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"VRF_REPORT $PATH_IN_HDFS/VRF_REPORT_$DATE_INFO
+hbase org.apache.hadoop.hbase.mapreduce.Import "$HBASE_PREFIX"TRUNK_REPORT $PATH_IN_HDFS/TRUNK_REPORT_$DATE_INFO
 echo -e "${RED_F}IMPORT COMPLETE !!! ${NORM}"
 
 
