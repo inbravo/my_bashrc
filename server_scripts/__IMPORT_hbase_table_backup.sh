@@ -22,7 +22,7 @@ echo -e "${RED_F}Enter Base PATH in HDFS ${NORM}"
 read PATH_IN_HDFS
 
 
-echo -e "${RED_F}Enter Base PATH in HDFS ${NORM}"
+echo -e "${RED_F}Hbase Prefix${NORM}"
 read HBASE_PREFIX
 
 

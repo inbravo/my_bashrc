@@ -17,19 +17,29 @@ WHITE_F="\033[37m"; WHITE_B="\033[47m"
 echo -e "${RED_F}Are you sure you want to truncate tables on Hbase (yes/no)${NORM}"
 read UPDATE_FILE
 
+echo -e "${RED_F}Please enter the Table PREFIX ex: DMO_TELLABS_${NORM}"
+read PREFIX
+
+
+
 if [ $UPDATE_FILE == "yes" ]; then
-  echo "
-  truncate 'AREA_TABLE'
-  truncate 'DATE_TABLE'
-  truncate 'LSP_DETAIL'
-  truncate 'NODE_DETAIL'
-  truncate 'PWE_DETAIL'
-  truncate 'RBS_DETAIL'
-  truncate 'RBS_RNC_PATH'
-  truncate 'REPORT_TABLE'
-  truncate 'RNC_DETAIL'
-  truncate 'TRUNK_DETAIL'
-  truncate 'VRF_DETAIL'" | hbase shell
+
+echo "
+truncate '"$PREFIX"RBS_DETAIL'
+truncate '"$PREFIX"NODE_DETAIL'
+truncate '"$PREFIX"LSP_DETAIL'
+truncate '"$PREFIX"PWE_DETAIL'
+truncate '"$PREFIX"ENTPWE_DETAIL'
+truncate '"$PREFIX"RBS_RNC_PATH'
+truncate '"$PREFIX"REPORT_TABLE'
+truncate '"$PREFIX"RNC_DETAIL'
+truncate '"$PREFIX"TRUNK_DETAIL'
+truncate '"$PREFIX"VRF_DETAIL'
+truncate '"$PREFIX"AREA_TABLE'
+truncate '"$PREFIX"DATE_TABLE'
+truncate '"$PREFIX"VRF_REPORT'
+truncate '"$PREFIX"TRUNK_REPORT'" | hbase shell
+
 fi
 if [ $UPDATE_FILE == "y" ]; then
   echo -e "${MAGENTA_F}Please type 'yes' if you are sure to delete HBase Tables${NORM}"
