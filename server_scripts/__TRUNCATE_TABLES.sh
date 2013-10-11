@@ -38,7 +38,10 @@ truncate '"$PREFIX"VRF_DETAIL'
 truncate '"$PREFIX"AREA_TABLE'
 truncate '"$PREFIX"DATE_TABLE'
 truncate '"$PREFIX"VRF_REPORT'
-truncate '"$PREFIX"TRUNK_REPORT'" | hbase shell
+truncate '"$PREFIX"TRUNK_REPORT'
+truncate '"$PREFIX"NODE_REPORT'
+truncate '"$PREFIX"AREA_REPORT'
+" | hbase shell
 
 fi
 if [ $UPDATE_FILE == "y" ]; then

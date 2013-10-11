@@ -15,8 +15,8 @@ CYAN_F="\033[36m"; CYAN_B="\033[46m"
 WHITE_F="\033[37m"; WHITE_B="\033[47m"
 
 CURRENTTIME="$(date +'%Y%m%d%H%M')"
-PREFIX="DMO_TELLABS_"
-#PREFIX=""
+#PREFIX="DMO_TELLABS_"
+PREFIX=""
 
 echo -e "${BOLD}${RED_F}Backing up Hbase Tables .... ${NORM}"
 hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"RBS_DETAIL /data/ti-dev/zahmed/tables/backup/"$PREFIX"RBS_DETAIL_$CURRENTTIME
@@ -33,6 +33,8 @@ hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"AREA_TABLE /data/ti-dev/
 hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"DATE_TABLE /data/ti-dev/zahmed/tables/backup/"$PREFIX"DATE_TABLE_$CURRENTTIME
 hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"VRF_REPORT /data/ti-dev/zahmed/tables/backup/"$PREFIX"VRF_REPORT_$CURRENTTIME
 hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"TRUNK_REPORT /data/ti-dev/zahmed/tables/backup/"$PREFIX"TRUNK_REPORT_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"NODE_REPORT /data/ti-dev/zahmed/tables/backup/"$PREFIX"NODE_REPORT_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"AREA_REPORT /data/ti-dev/zahmed/tables/backup/"$PREFIX"AREA_REPORT_$CURRENTTIME
 
 echo -e "${BOLD}${RED_F}Backup Complete ... ${NORM}"
 echo -e "${YELLOW_F}"
