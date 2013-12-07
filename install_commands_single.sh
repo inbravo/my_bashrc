@@ -272,7 +272,7 @@ fi
 
 echo -e "${RED_F}Would you like to install Cloudera for Precise Single Node Cluster? (y/n)${NORM}"
 read SET_CLOUDERA_PSEUDO_INSTALL
-if [ "${SET_CLOUDERA_PSEUDO_INSTALL}" == "y" ]; then
+if [ "${SET_CLOUDERA_PSEUDO_INSTALL}" == "n" ]; then
 	installing_cloudera_precise
 else
 	 echo -e "${RED_F}CLOUDERA_PSEUDO Not Installed${NORM}"
@@ -282,7 +282,7 @@ fi
 
 echo -e "${RED_F}Would you like to Configure Cloudera for Precise Single Node Cluster? (y/n)${NORM}"
 read SET_CLOUDERA_PSEUDO_CONFIG
-if [ "${SET_CLOUDERA_PSEUDO_CONFIG}" == "y" ]; then
+if [ "${SET_CLOUDERA_PSEUDO_CONFIG}" == "n" ]; then
 	config_cloudera_hadoop
 else
 	 echo -e "${RED_F}CLOUDERA_CONFIG Not Complete${NORM}"
@@ -292,7 +292,7 @@ fi
 
 echo -e "${RED_F}Would you like to Configure Hbase for Precise Single Node Cluster? (y/n)${NORM}"
 read SET_HBASE_PSEUDO_CONFIG
-	if [ "${SET_HBASE_PSEUDO_CONFIG}" == "y" ]; then		
+	if [ "${SET_HBASE_PSEUDO_CONFIG}" == "n" ]; then		
 		if [ -f $HBASE_ORG_PATH ]; then
         		config_hbase
 		else

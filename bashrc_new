@@ -78,15 +78,7 @@ alias hrmr='hadoop fs -rm -r'
 alias hcp2l='hadoop fs -copyToLocal'
 alias hcp4l='hadoop fs -copyFromLocal'
 
-DEV_DIR="13July2013"
-
-alias cdli='cd /home/ahmed/AHMED/work/code/'$DEV_DIR'/development_branch/'
-alias cds='cd /home/ahmed/AHMED/work/code/'$DEV_DIR'/tellabs_dev_branch/'
-alias cdg='cd /home/ahmed/AHMED/work/code/gitRepos/'
-alias cdt='cd /home/ahmed/AHMED/work/TellabsFiles/'
-alias cdjs='cd /home/ahmed/AHMED/work/code/'$DEV_DIR'/development_branch/li-extension/li-extension-tellabs/src/test/resources/js/scripts'
-alias cdgit='cd /home/ahmed/AHMED/work/gitrepos/big_data_learning/'
-alias cdbgit='cd /home/ahmed/AHMED/work/gitrepos/my_bashrc'
+alias cdg='cd /home/ahmed/AHMED/work/code/gitRepos'
 
 alias mvnc='mvn clean install -DskipTests=true'
 alias intellij=' /opt/ideaC/bin/idea.sh &'
