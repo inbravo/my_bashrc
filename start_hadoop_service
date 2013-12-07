@@ -1,0 +1,2 @@
+sudo service hbase-master start
+sudo service hbase-regionserver start
