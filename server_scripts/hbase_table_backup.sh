@@ -15,25 +15,30 @@ CYAN_F="\033[36m"; CYAN_B="\033[46m"
 WHITE_F="\033[37m"; WHITE_B="\033[47m"
 
 CURRENTTIME="$(date +'%Y%m%d%H%M')"
+#PREFIX="DMO_TELLABS_"
+PREFIX=""
 
 echo -e "${BOLD}${RED_F}Backing up Hbase Tables .... ${NORM}"
-hbase org.apache.hadoop.hbase.mapreduce.Export RBS_DETAIL /data/ti-dev/zahmed/tables/backup/RBS_DETAIL_$CURRENTTIME
-hbase org.apache.hadoop.hbase.mapreduce.Export NODE_DETAIL /data/ti-dev/zahmed/tables/backup/NODE_DETAIL_$CURRENTTIME
-hbase org.apache.hadoop.hbase.mapreduce.Export LSP_DETAIL /data/ti-dev/zahmed/tables/backup/LSP_DETAIL_$CURRENTTIME
-hbase org.apache.hadoop.hbase.mapreduce.Export PWE_DETAIL /data/ti-dev/zahmed/tables/backup/PWE_DETAIL_$CURRENTTIME
-hbase org.apache.hadoop.hbase.mapreduce.Export RBS_RNC_PATH /data/ti-dev/zahmed/tables/backup/RBS_RNC_PATH_$CURRENTTIME
-hbase org.apache.hadoop.hbase.mapreduce.Export REPORT_TABLE /data/ti-dev/zahmed/tables/backup/REPORT_TABLE_$CURRENTTIME
-hbase org.apache.hadoop.hbase.mapreduce.Export RNC_DETAIL /data/ti-dev/zahmed/tables/backup/RNC_DETAIL_$CURRENTTIME
-hbase org.apache.hadoop.hbase.mapreduce.Export TRUNK_DETAIL /data/ti-dev/zahmed/tables/backup/TRUNK_DETAIL_$CURRENTTIME
-hbase org.apache.hadoop.hbase.mapreduce.Export VRF_DETAIL /data/ti-dev/zahmed/tables/backup/VRF_DETAIL_$CURRENTTIME
-hbase org.apache.hadoop.hbase.mapreduce.Export AREA_TABLE /data/ti-dev/zahmed/tables/backup/AREA_TABLE_$CURRENTTIME
-hbase org.apache.hadoop.hbase.mapreduce.Export DATE_TABLE /data/ti-dev/zahmed/tables/backup/DATE_TABLE_$CURRENTTIME
-hbase org.apache.hadoop.hbase.mapreduce.Export VRF_REPORT /data/ti-dev/zahmed/tables/backup/VRF_REPORT_$CURRENTTIME
-hbase org.apache.hadoop.hbase.mapreduce.Export TRUNK_REPORT /data/ti-dev/zahmed/tables/backup/TRUNK_REPORT_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"RBS_DETAIL /data/ti-dev/zahmed/tables/backup/"$PREFIX"RBS_DETAIL_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"NODE_DETAIL /data/ti-dev/zahmed/tables/backup/"$PREFIX"NODE_DETAIL_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"LSP_DETAIL /data/ti-dev/zahmed/tables/backup/"$PREFIX"LSP_DETAIL_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"PWE_DETAIL /data/ti-dev/zahmed/tables/backup/"$PREFIX"PWE_DETAIL_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"ENTPWE_DETAIL /data/ti-dev/zahmed/tables/backup/"$PREFIX"ENTPWE_DETAIL_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"RBS_RNC_PATH /data/ti-dev/zahmed/tables/backup/"$PREFIX"RBS_RNC_PATH_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"REPORT_TABLE /data/ti-dev/zahmed/tables/backup/"$PREFIX"REPORT_TABLE_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"RNC_DETAIL /data/ti-dev/zahmed/tables/backup/"$PREFIX"RNC_DETAIL_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"TRUNK_DETAIL /data/ti-dev/zahmed/tables/backup/"$PREFIX"TRUNK_DETAIL_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"VRF_DETAIL /data/ti-dev/zahmed/tables/backup/"$PREFIX"VRF_DETAIL_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"AREA_TABLE /data/ti-dev/zahmed/tables/backup/"$PREFIX"AREA_TABLE_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"DATE_TABLE /data/ti-dev/zahmed/tables/backup/"$PREFIX"DATE_TABLE_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"VRF_REPORT /data/ti-dev/zahmed/tables/backup/"$PREFIX"VRF_REPORT_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"TRUNK_REPORT /data/ti-dev/zahmed/tables/backup/"$PREFIX"TRUNK_REPORT_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"NODE_REPORT /data/ti-dev/zahmed/tables/backup/"$PREFIX"NODE_REPORT_$CURRENTTIME
+hbase org.apache.hadoop.hbase.mapreduce.Export "$PREFIX"AREA_REPORT /data/ti-dev/zahmed/tables/backup/"$PREFIX"AREA_REPORT_$CURRENTTIME
 
 echo -e "${BOLD}${RED_F}Backup Complete ... ${NORM}"
 echo -e "${YELLOW_F}"
-hadoop fs -ls /data/ti-dev/zahmed/tables/backup/
+hadoop fs -ls /data/ti-dev/zahmed/tables/backup/"$PREFIX"*$CURRENTTIME*
 echo -e "${NORM}"
-echo -e "${BOLD}${RED_F}Backup Location on HDFS : hadoop fs -ls /data/ti-dev/zahmed/tables/backup/ ${NORM}"
+echo -e "${BOLD}${RED_F}Backup Location on HDFS : hadoop fs -ls /data/ti-dev/zahmed/tables/backup/"$PREFIX" ${NORM}"
 
