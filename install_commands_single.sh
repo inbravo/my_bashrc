@@ -84,13 +84,13 @@ installing_linux_headers(){
 
 downloading_files(){
 	cd ~/Downloads
-	wget -c http://mirrors.sonic.net/apache/tomcat/tomcat-7/v7.0.42/bin/apache-tomcat-7.0.42.tar.gz
+	wget -c http://mirrors.sonic.net/apache/tomcat/tomcat-7/v7.0.50/bin/apache-tomcat-7.0.50.tar.gz
 	wget -c http://download.jetbrains.com/idea/ideaIU-12.1.4.tar.gz
 	wget -c http://download.jetbrains.com/idea/ideaIC-12.1.4.tar.gz
 }
 
 transfer_files_opt(){
-	sudo tar xvzf apache-tomcat-7.0.42.tar.gz -C /opt
+    sudo tar xvzf apache-tomcat-7.0.50.tar.gz -C /opt
     sudo tar xvzf ideaIU-12.1.4.tar.gz -C /opt
     sudo tar xvzf ideaIC-12.1.4.tar.gz -C /opt
     
@@ -98,7 +98,7 @@ transfer_files_opt(){
 
 configuring_downloads(){
 	cd /opt/
-	#sudo chown $USER:$USER -R apache-tomcat-7.0.42
+	sudo chown $USER:$USER -R apache-tomcat-7.0.50
 	sudo chown $USER:$USER -R idea*
 	#sudo /opt/lampp/lampp start		
 }
